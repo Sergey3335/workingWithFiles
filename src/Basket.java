@@ -3,7 +3,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.Arrays;
 
-public class Basket {
+public class Basket implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String[] products;
     private int[] prices;
     private int[] quantity;
@@ -56,7 +57,7 @@ public class Basket {
         Basket basket = new Basket();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(textFile))) {
             String productRead = bufferedReader.readLine();
-            String pricesRead = bufferedReader.readLine();
+                String pricesRead = bufferedReader.readLine();
             String quantityRead = bufferedReader.readLine();
 
             basket.products = productRead.split(" ");
@@ -70,6 +71,24 @@ public class Basket {
                     .toArray();
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return basket;
+    }
+
+    public void saveBin (File file){
+        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file))){
+            outputStream.writeObject(this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Basket loadFromBinFile (File file) {
+        Basket basket = null;
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))){
+            basket = (Basket) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return basket;
