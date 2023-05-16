@@ -87,7 +87,7 @@ public class Basket implements Serializable {
     public static Basket loadFromBinFile (File file) {
         Basket basket = null;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))){
-            basket = (Basket) inputStream.readObject();
+            basket = (Basket) inputStream   .readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
