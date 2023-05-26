@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static File saveFile = new File("basket.json");
+    //static File saveFile = new File("basket.json");
 
     static String[] products = new String[]{"Хлеб", "Яблоки", "Молоко"};
     static int[] prices = new int[]{15, 54, 110};
@@ -21,23 +21,19 @@ public class Main {
         }
         ReaderXML settings = new ReaderXML(new File("shop.xml"));
         File loadFile = new File(settings.loadFile);
-        File saveFaile = new File(settings.saveFile);
+        File saveFile = new File(settings.saveFile);
         File logFile = new File(settings.logFile);
 
         Basket basket = createBasket(loadFile, settings.isLoad, settings.loadFormat);
-        if (saveFile.exists()){
-            basket = Basket.loadFromJSONFile(saveFile);
-        } else {
-            basket = new Basket(products , prices);
-        }
-
         ClientLog log = new ClientLog();
 
         while (true) {
             System.out.println("Выбирите товар и количевто или введите 'end'");
             String input = scanner.nextLine();
             if ("end".equals(input)) {
-                log.exportAsCSV(new File("log.csv"));
+                if (settings.isLog){
+                    log.exportAsCSV(logFile);
+                }
                 break;
             }
 
@@ -47,9 +43,15 @@ public class Main {
             int productCount = Integer.parseInt(parts[1]);
 
             basket.addToCart(productNumber, productCount);
-            log.log(productNumber, productCount);
-            basket.saveJSON(saveFile);
-
+            if (settings.isLog){
+                log.log(productNumber, productCount);
+            }
+            if(settings.isSave){
+                switch (settings.saveFormat){
+                    case "json" -> basket.saveJSON(saveFile);
+                    case "txt" -> basket.saveTxt(saveFile);
+                }
+            }
         }
         basket.printCart();
 
@@ -64,8 +66,10 @@ public class Main {
                 default -> new Basket(products, prices);
             };
         }else{
+            basket =  new Basket(products, prices);
 
         }
+        return basket;
     }
 }
 

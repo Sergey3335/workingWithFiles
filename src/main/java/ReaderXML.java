@@ -9,16 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class ReaderXML {
-    boolean isLoad;
-    String loadFile;
-    String loadFormat;
+    final boolean isLoad;
+    final String loadFile;
+    final String loadFormat;
 
-    boolean isSave;
-    String saveFile;
-    String saveFormat;
+    final boolean isSave;
+    final String saveFile;
+    final String saveFormat;
 
-    boolean isLog;
-    String logFile;
+    final boolean isLog;
+    final String logFile;
 
     public ReaderXML (File XMLFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
