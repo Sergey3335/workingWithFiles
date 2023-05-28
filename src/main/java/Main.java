@@ -5,10 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
 public class Main {
-
-    //static File saveFile = new File("basket.json");
 
     static String[] products = new String[]{"Хлеб", "Яблоки", "Молоко"};
     static int[] prices = new int[]{15, 54, 110};
@@ -36,9 +33,7 @@ public class Main {
                 }
                 break;
             }
-
             String[] parts = input.split(" ");
-
             int productNumber = Integer.parseInt(parts[0]) - 1;
             int productCount = Integer.parseInt(parts[1]);
 
@@ -54,9 +49,7 @@ public class Main {
             }
         }
         basket.printCart();
-
     }
-
     private static Basket createBasket(File loadFile, boolean isLoad, String loadFormat) {
         Basket basket;
         if (isLoad && loadFile.exists()){

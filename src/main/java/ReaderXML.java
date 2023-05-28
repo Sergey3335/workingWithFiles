@@ -20,10 +20,10 @@ public class ReaderXML {
     final boolean isLog;
     final String logFile;
 
-    public ReaderXML (File XMLFile) throws ParserConfigurationException, IOException, SAXException {
+    public ReaderXML (File xmlFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(XMLFile);
+        Document doc = builder.parse(xmlFile);
 
         Element root = doc.getDocumentElement();
         Element loadSettings = (Element) root.getElementsByTagName("load").item(0);

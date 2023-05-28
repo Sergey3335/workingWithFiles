@@ -17,7 +17,7 @@ public class ClientLog {
 
     public void exportAsCSV(File txtFile){
         if(!txtFile.exists()){
-            log.add(0,new String[]{"productNum , amount"});
+            log.add(0, new String[]{"productNum + amount"});
 
         }
 

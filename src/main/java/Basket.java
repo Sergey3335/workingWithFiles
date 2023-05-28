@@ -49,9 +49,7 @@ public class Basket implements Serializable {
             for (Object quantity : quantity) {
                 out.print(quantity + " ");
             }
-
         }
-
     }
 
     public static Basket loadFromTxtFile(File textFile) {
@@ -77,8 +75,8 @@ public class Basket implements Serializable {
         return basket;
     }
 
-    public void saveJSON (File file){
-        try(PrintWriter writer = new PrintWriter(file)){
+    public void saveJSON(File file) {
+        try (PrintWriter writer = new PrintWriter(file)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(this);
             writer.print(json);
@@ -87,12 +85,12 @@ public class Basket implements Serializable {
         }
     }
 
-    public static Basket loadFromJSONFile (File file) {
+    public static Basket loadFromJSONFile(File file) {
         Basket basket = null;
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             StringBuilder builder = new StringBuilder();
             String line = null;
-            while ((line = reader.readLine())!=null){
+            while ((line = reader.readLine()) != null) {
                 builder.append(line);
             }
             Gson gson = new Gson();
