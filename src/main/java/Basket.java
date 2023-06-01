@@ -10,6 +10,13 @@ public class Basket implements Serializable {
     private int[] prices;
     private int[] quantity;
 
+    public int[] getQuantity() {
+        return quantity;
+    }
+    public String [] getProducts(){
+        return products;
+    }
+
     public Basket() {
     }
 
